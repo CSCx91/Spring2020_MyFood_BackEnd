@@ -211,3 +211,5 @@ modules.xml
 .history
 
 # End of https://www.gitignore.io/api/jetbrains+all,visualstudiocode
+
+database_config.json

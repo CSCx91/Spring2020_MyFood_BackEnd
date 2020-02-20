@@ -3,11 +3,30 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
+var fs = require('fs');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+var rawdata = fs.readFileSync('database_config.json');
+var database_config = JSON.parse(rawdata);
+var database_url = database_config.url;
+database_url = database_url.replace('<username>', database_config.username);
+database_url = database_url.replace('<password>', database_config.password);
+database_url = database_url.replace('<database>', database_config.database);
+
+mongoose
+	.connect(database_url, { useNewUrlParser: true, useUnifiedTopology: true })
+	.then(function() {
+		console.log('Connect to MongoDB successfully');
+	})
+	.catch(function(err) {
+		console.log('--------connect to mongodb error-------------');
+		console.log(err);
+	});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
