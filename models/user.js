@@ -14,7 +14,6 @@ let test = {
     password: "t0tAlly secure@"
 };
 
-
 let result = joi.validate(test, schema);
 
 console.log(result.error);
