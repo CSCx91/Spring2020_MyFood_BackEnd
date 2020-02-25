@@ -8,12 +8,3 @@ const schema = joi.object().keys({
     */
     password: joi.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/).required()
 });
-
-let test = {
-    username: "test@googLe.com",
-    password: "t0tAlly secure@"
-};
-
-let result = joi.validate(test, schema);
-
-console.log(result.error);
