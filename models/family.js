@@ -11,3 +11,6 @@ const family = joi.object({
     profileId: joi.array().items(String),
     userID: Joi.string().required()
 });
+
+module.exports = familySchema;
+module.exports = family;
