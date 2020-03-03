@@ -1,7 +1,4 @@
-const Joi = require('joi')
-const profile = Joi.object({
-    allergies: Joi.array().required(),
-    foodPref: Joi.array().required(),
-    fitness: Joi.int().required(),
-    familyID: Joi.string().required()
-});
+import { Mongoose } from "mongoose";
+
+var profileSchema = new Mongoose.schema({familyID: [String]});
+var profile = Mongoose.model('profile', profileSchema);
