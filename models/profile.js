@@ -11,7 +11,7 @@ var profileSchema = new Mongoose.schema({
 });
 var profile = Mongoose.model('profile', profileSchema);
 
-const profile = Joi.object({
+const joiProfile = Joi.object({
     allergies: Joi.array().required(),
     foodPref: Joi.array().required(),
     fitness: Joi.int().required(),

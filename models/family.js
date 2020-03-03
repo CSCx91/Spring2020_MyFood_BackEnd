@@ -1,16 +1,16 @@
-import { Mongoose } from "mongoose";
+const Mongoose = require('mongoose');
 const joi = require('joi')
 
-var familySchema = new Mongoose.schema({
-    profileID: [String],
+const familySchema = new Mongoose.Schema({
+    profileID: [],
     userID: String
 });
-var family = Mongoose.model('family', familySchema);
+var mongoFamily = Mongoose.model('family', familySchema);
 
-const family = joi.object({
+const joiFamily = joi.object({
     profileId: joi.array().items(String),
     userID: Joi.string().required()
 });
 
-module.exports = familySchema;
-module.exports = family;
+module.exports.mongoFamily = mongoFamily;
+module.exports.mongoFamily = joiFamily;
