@@ -16,14 +16,41 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.post('/', function(req,res) {
+router.post('/', async function(req,res) {
   const body = req.body;
-  let validationResult = joiUser.validate(body)
-  console.log(validationResult)
-  // TODO use validation result and check for duplicates
+  let validationResult = joiUser.validate(body);
+  // check if there is an error
+  if (validationResult.error){
+    res.send({status: "fail", message: "valition error"});
+    return;
+  }
 
-  // let newUser = new mongoUser(body)
-  // newUser.save();
-})
+  let existUser;
+
+  // checking if user is already in db
+  await mongoUser.findOne({username: body.username}, (err, user) => {
+    if (err){
+      return;
+    }
+    existUser = user;
+
+  });
+
+  if (existUser) {
+    res.send({status: "fail", message: "user exists"});
+    return
+  }
+  
+  let newUser = new mongoUser(body);
+
+  // check if there is an error when adding to database
+  newUser.save((err) => {
+    if (err){
+      res.send({status: "fail", message: "can't create user"});
+      return;
+    }
+    res.send({status: "success"})
+  });
+});
 
 module.exports = router;
