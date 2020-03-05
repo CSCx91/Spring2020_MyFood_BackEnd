@@ -1,5 +1,5 @@
 import { Mongoose } from "mongoose";
-const Joi = require('joi')
+const joi = require('joi');
 
 var profileSchema = new Mongoose.schema({
     
@@ -11,11 +11,11 @@ var profileSchema = new Mongoose.schema({
 });
 var profile = Mongoose.model('profile', profileSchema);
 
-const joiProfile = Joi.object({
-    allergies: Joi.array().required(),
-    foodPref: Joi.array().required(),
-    fitness: Joi.int().required(),
-    familyID: Joi.string().required()
+const joiProfile = joi.object({
+    allergies: joi.array().required(),
+    foodPref: joi.array().required(),
+    fitness: joi.int().required(),
+    familyID: joi.string().required()
 });
 
 
