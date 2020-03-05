@@ -1,6 +1,7 @@
 const joi = require("joi");
 const mongoose = require('mongoose')
 
+// joi schema
 const schema = joi.object().keys({
     username: joi.string().regex(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/).required(),
     /*
@@ -10,8 +11,7 @@ const schema = joi.object().keys({
     password: joi.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/).required()
 });
 
-
-
+// mongoose schema
 var userSchema = new mongoose.Schema({
     username: String,
     password: String
@@ -19,6 +19,7 @@ var userSchema = new mongoose.Schema({
 
 let user = mongoose.model('user', userSchema)
 
+// exports
 module.exports = {
     JoiModel: schema,
     MongoModel: user
