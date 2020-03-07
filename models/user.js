@@ -4,10 +4,6 @@ const mongoose = require('mongoose')
 // joi schema
 const schema = joi.object().keys({
     username: joi.string().required(),
-    /*
-        Regex means password must have 1 lowercase, 1 uppercase, 
-        1 number, 1 special, and be at least 8 char
-    */
     password: joi.string().required()
 });
 
