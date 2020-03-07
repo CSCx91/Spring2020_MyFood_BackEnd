@@ -3,17 +3,9 @@ var router = express.Router();
 var mongoUser = require('../models/user').MongoModel;
 var joiUser = require('../models/user').JoiModel;
 
-/*
-Function for determining if a username is already
-in the database
-*/
-function isUniqueUser(uname){
-  return user.find({username: uname});
-}
-
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  // TODO: get user from ID
 });
 
 router.post('/', async function(req,res) {
