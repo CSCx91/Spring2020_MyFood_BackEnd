@@ -3,9 +3,30 @@ var router = express.Router();
 var mongoUser = require('../models/user').MongoModel;
 var joiUser = require('../models/user').JoiModel;
 var sha256 = require('js-sha256').sha256;
+var mongoose = require('mongoose');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/:id', async (req, res, next) => {
+	let id = req.params.id;
+
+	try {
+		let user = await mongoUser.findOne({
+			_id: id
+		});
+
+		if (user) {
+			let { password, ...resUser } = user._doc;
+			// console.log(user);
+			res.send(resUser);
+		} else {
+			res.send(null);
+		}
+	} catch (error) {
+		console.log(error);
+		res.send(null);
+	}
+
+	// console.log(user);
 	// TODO: get user from ID
 });
 
@@ -42,6 +63,7 @@ router.post('/', async function(req, res) {
 	// check if there is an error when adding to database
 	newUser.save(err => {
 		if (err) {
+			console.log(err);
 			res.send({ status: 'fail', message: "can't create user" });
 			return;
 		}
