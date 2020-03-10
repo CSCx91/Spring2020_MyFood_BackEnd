@@ -4,12 +4,13 @@ var mongoFamily = require('../models/Family').mongoFamily;
 var joiFamily = require('../models/Family').joiFamily;
 
 
-router.get('../', function(req, res) {
+/*router.get('../', (req, res) => {
 
-    var 
+     
 
 
-})
+})*/
+
 
 
 
