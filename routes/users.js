@@ -35,7 +35,10 @@ router.post('/', async function(req, res) {
 		return;
 	}
 
-	let newUser = new mongoUser(body);
+	let { password, ...userInfo } = body;
+	password = sha256(password);
+	// console.log(password, { ...userInfo, password });
+	let newUser = new mongoUser({ ...userInfo, password });
 	// check if there is an error when adding to database
 	newUser.save(err => {
 		if (err) {
