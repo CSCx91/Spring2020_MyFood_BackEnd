@@ -14,7 +14,7 @@ var userSchema = new mongoose.Schema({
 	access_token: [
 		{
 			value: String,
-			expireDate: Date
+			expireDate: Number
 		}
 	]
 });

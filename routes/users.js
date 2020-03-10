@@ -16,18 +16,13 @@ router.get('/:id', async (req, res, next) => {
 
 		if (user) {
 			let { password, ...resUser } = user._doc;
-			// console.log(user);
 			res.send(resUser);
 		} else {
 			res.send(null);
 		}
 	} catch (error) {
-		console.log(error);
 		res.send(null);
 	}
-
-	// console.log(user);
-	// TODO: get user from ID
 });
 
 router.post('/', async function(req, res) {
@@ -58,8 +53,8 @@ router.post('/', async function(req, res) {
 
 	let { password, ...userInfo } = body;
 	password = sha256(password);
-	// console.log(password, { ...userInfo, password });
-	let newUser = new mongoUser({ ...userInfo, password });
+	let newUser = new mongoUser({ ...userInfo, password, access_token: [] });
+
 	// check if there is an error when adding to database
 	newUser.save(err => {
 		if (err) {
