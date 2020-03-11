@@ -3,24 +3,26 @@ var router = express.Router();
 var mongoUser = require('../models/user').MongoModel;
 var joiUser = require('../models/user').JoiModel;
 var sha256 = require('js-sha256').sha256;
-var mongoose = require('mongoose');
+var userController = require('../controllers/user');
+
+var getUserById = userController.getUserById;
 
 /* GET users listing. */
 router.get('/:id', async (req, res, next) => {
 	let id = req.params.id;
-
 	try {
-		let user = await mongoUser.findOne({
-			_id: id
-		});
-
+		let user = await getUserById(id);
 		if (user) {
-			let { password, ...resUser } = user._doc;
+			let { password, access_token, ...resUser } = user._doc;
 			res.send(resUser);
 		} else {
 			res.send(null);
 		}
 	} catch (error) {
+		console.log(
+			'--------------------error at get user route---------------------'
+		);
+		console.log(error);
 		res.send(null);
 	}
 });
