@@ -69,7 +69,6 @@ let checkToken = async (token, userId) => {
 		);
 		// if valid then proceed to create a new token
 		if (access_token) {
-			console.log(access_token);
 			let now = new Date();
 			user.access_token = user.access_token.filter(
 				item => item.value !== token
