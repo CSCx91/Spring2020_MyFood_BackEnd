@@ -37,6 +37,7 @@ router.post('/', async function(req, res) {
 	}
 
 	let existUser;
+
 	// checking if user is already in db
 	await mongoUser.findOne({ username: body.username }, (err, user) => {
 		if (err) {
