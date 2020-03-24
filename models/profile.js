@@ -20,4 +20,4 @@ const joiProfile = joi.object({
 
 
 module.exports = profileSchema;
-module.exports = profile;
+module.exports = joiProfile;

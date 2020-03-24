@@ -3,14 +3,21 @@ var router = express.Router();
 var mongoFamily = require('../models/Family').mongoFamily;
 var joiFamily = require('../models/Family').joiFamily;
 
+try {
+router.get('/:id', async (req, res) => {
+    let id = req.params.id;
 
-/*router.get('../', (req, res) => {
+    let family = await mongoFamily.findById(id);
 
+    res.send(family);
      
 
 
-})*/
-
+})
+}
+catch(err) {
+    res.status(400).send({status: "Failed", message: "Cannot get data"})
+}
 
 
 
@@ -34,5 +41,6 @@ router.post('/', (req, res) => {
             res.status(400).send({status: "fail", message: "can't save data"});
         });
 });
+
 
 module.exports = router;
