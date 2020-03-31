@@ -12,9 +12,8 @@ router.get('/:id', async (req, res) => {
     } 
     
     catch(err) {
-        res.status(400).send({status: "Failed", message: "Cannot get data"})
+        return null;
     }
-
 });
 
 
