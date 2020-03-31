@@ -3,22 +3,19 @@ var router = express.Router();
 var mongoFamily = require('../models/Family').mongoFamily;
 var joiFamily = require('../models/Family').joiFamily;
 
-try {
 router.get('/:id', async (req, res) => {
-    let id = req.params.id;
+    
+    try {
+        let id = req.params.id;
+        let family = await mongoFamily.findById(id);
+        res.send(family);
+    } 
+    
+    catch(err) {
+        res.status(400).send({status: "Failed", message: "Cannot get data"})
+    }
 
-    let family = await mongoFamily.findById(id);
-
-    res.send(family);
-     
-
-
-})
-}
-catch(err) {
-    res.status(400).send({status: "Failed", message: "Cannot get data"})
-}
-
+});
 
 
 router.post('/', (req, res) => {
