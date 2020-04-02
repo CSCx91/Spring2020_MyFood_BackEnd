@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 
 // joi schema
 const schema = joi.object().keys({
-	username: joi.string().required(),
-	password: joi.string().required()
+	username: joi.string(),
+	password: joi.string()
 });
 
 // mongoose schema

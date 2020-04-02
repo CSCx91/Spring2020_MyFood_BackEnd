@@ -10,8 +10,7 @@ router.get('/:id', async (req,res, next) => {
     try {
         let fridge = await getFridgeById(id)
         if (fridge) {
-            let {id, freezer, cooler} = user._doc;
-            res.send(resFridge)
+            res.send(fridge)
         }
             else {
                 res.send(null)

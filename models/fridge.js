@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 
 // joi schema
 const schema = joi.object().keys({
-	id: joi.string().required(),
-    freezer: joi.array().items(joi.string()).required(),
-    cooler: joi.array().items(joi.string()).required()
+	id: joi.string(),
+    freezer: joi.array().items(joi.string()),
+    cooler: joi.array().items(joi.string())
 });
 
 // mongoose schema
