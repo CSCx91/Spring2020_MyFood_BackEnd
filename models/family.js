@@ -1,7 +1,7 @@
 const Mongoose = require('mongoose');
 const joi = require('joi');
 
-const familySchema = new Mongoose.Schema({
+const familySchema = Mongoose.Schema({
     profileID: [String],
     userID: String
 });

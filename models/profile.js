@@ -1,7 +1,7 @@
-import { Mongoose } from "mongoose";
+const Mongoose = require('mongoose');;
 const joi = require('joi');
 
-var profileSchema = new Mongoose.schema({
+var profileSchema = Mongoose.Schema({
     
     familyID: String,
     allergies: [String],
@@ -9,15 +9,15 @@ var profileSchema = new Mongoose.schema({
     foodPref: [String]
 
 });
-var profile = Mongoose.model('profile', profileSchema);
+var mongoProfile = Mongoose.model('profile', profileSchema);
 
 const joiProfile = joi.object({
     allergies: joi.array().required(),
     foodPref: joi.array().required(),
-    fitness: joi.int().required(),
+    fitness: joi.number().required(),
     familyID: joi.string().required()
 });
 
 
-module.exports = profileSchema;
+module.exports = mongoProfile;
 module.exports = joiProfile;
