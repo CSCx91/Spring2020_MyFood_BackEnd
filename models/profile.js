@@ -1,23 +1,23 @@
-const Mongoose = require('mongoose');;
+const Mongoose = require('mongoose');
 const joi = require('joi');
 
 var profileSchema = Mongoose.Schema({
     
-    familyID: String,
+    familyId: String,
     allergies: [String],
-    fitness: String,
+    fitness: Number,
     foodPref: [String]
 
 });
 var mongoProfile = Mongoose.model('profile', profileSchema);
 
 const joiProfile = joi.object({
-    allergies: joi.array().required(),
-    foodPref: joi.array().required(),
+    allergies: joi.array().items(joi.string()),
+    foodPref: joi.array().items(joi.string()),
     fitness: joi.number().required(),
-    familyID: joi.string().required()
+    familyId: joi.string().required()
 });
 
 
-module.exports = mongoProfile;
-module.exports = joiProfile;
+module.exports.mongoProfile = mongoProfile;
+module.exports.joiProfile = joiProfile

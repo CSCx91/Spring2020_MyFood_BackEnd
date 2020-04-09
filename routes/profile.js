@@ -1,23 +1,21 @@
 var express = require('express');
 var router = express.Router();
-var mongoProfile = require('../models/Profile').mongoProfile;
+var mongoProfile = require('../models/Profile').mongoProfile
 var joiProfile = require('../models/Profile').joiProfile;
 
-try {
     router.get('/:id', async (req, res) => {
+        
+    try {
         let id = req.params.id;
-    
         let Profile = await mongoProfile.findById(id);
-    
         res.send(Profile);
-         
-    
-    
-    })
     }
+    
     catch(err) {
-        res.status(400).send({status: "Failed", message: "Cannot get data"})
+        res.send(null);
     }
+});
+
 
 router.post('/', (req, res) => {
 
@@ -25,6 +23,7 @@ router.post('/', (req, res) => {
 
     let validationResult = joiProfile.validate(data);
     if (validationResult.error){
+        console.log(validationResult.error)
         res.send({status: "fail", message: "validate error"})
         return;
     }
@@ -39,16 +38,27 @@ router.post('/', (req, res) => {
         });
 });
 
-/*
+
 router.put('/', (req, res) => {
 
     let id = req.params.id;
     let data = req.body;
+
+    let validationResult = joiProfile.validate(data);
+    if (validationResult.error) {
+        res.send({status: "fail", message: "validate error"})
+        return;
+    }
     
-    let Profile = await mongoProfile.findByIdAndUpdate(id, data);
+    try {
+        mongoProfile.findByIdAndUpdate(id, data);
+    }
+
+    catch(err) {
+        res.status(400).send({status: "fail", message: "could not find and update data"});
+    }
 
 
+});
 
-})
-*/
 module.exports = router;

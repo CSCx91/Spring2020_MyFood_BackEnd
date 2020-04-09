@@ -12,7 +12,7 @@ router.get('/:id', async (req, res) => {
     } 
     
     catch(err) {
-        return null;
+        res.send(null);
     }
 });
 
@@ -36,6 +36,28 @@ router.post('/', (req, res) => {
         .catch(err => {
             res.status(400).send({status: "fail", message: "can't save data"});
         });
+});
+
+router.put('/', (req, res) => {
+
+    let id = req.params.id;
+    let data = req.body;
+
+    let validationResult = joiFamily.validate(data);
+    if (validationResult.error) {
+        res.send({status: "fail", message: "validate error"})
+        return;
+    }
+    
+    try {
+        mongoFamily.findByIdAndUpdate(id, data);
+    }
+
+    catch(err) {
+        res.status(400).send({status: "fail", message: "could not find and update data"});
+    }
+
+
 });
 
 
