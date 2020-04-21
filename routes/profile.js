@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
 });
 
 
-router.put('/', (req, res) => {
+router.put('/:id', async (req, res) => {
 
     let id = req.params.id;
     let data = req.body;
@@ -52,6 +52,7 @@ router.put('/', (req, res) => {
     
     try {
         mongoProfile.findByIdAndUpdate(id, data);
+        res.send({status: "success"});
     }
 
     catch(err) {

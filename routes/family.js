@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
         });
 });
 
-router.put('/', (req, res) => {
+router.put('/:id', (req, res) => {
 
     let id = req.params.id;
     let data = req.body;
@@ -51,12 +51,12 @@ router.put('/', (req, res) => {
     
     try {
         mongoFamily.findByIdAndUpdate(id, data);
+        res.send({status: "successful"});
     }
 
     catch(err) {
         res.status(400).send({status: "fail", message: "could not find and update data"});
     }
-
 
 });
 
