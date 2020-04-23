@@ -60,5 +60,19 @@ router.put('/:id', (req, res) => {
 
 });
 
+router.delete('/:id', (req, res) => {
+
+    let id = req.params.id;
+
+    try {
+        mongoFamily.findByIdAndDelete(id);
+        res.send({status: "Success"});
+    }
+
+    catch(err) {
+        res.status(400).send({status: "fail", message: "Failed to delete family"});
+    }
+});
+
 
 module.exports = router;
