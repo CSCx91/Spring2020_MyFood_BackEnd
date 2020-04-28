@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
         });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
 
     let id = req.params.id;
     let data = req.body;
@@ -50,7 +50,7 @@ router.put('/:id', (req, res) => {
     }
     
     try {
-        mongoFamily.findByIdAndUpdate(id, data);
+        await mongoFamily.findByIdAndUpdate(id, data);
         res.send({status: "successful"});
     }
 
@@ -60,12 +60,12 @@ router.put('/:id', (req, res) => {
 
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
 
     let id = req.params.id;
 
     try {
-        mongoFamily.findByIdAndDelete(id);
+        await mongoFamily.findByIdAndDelete(id);
         res.send({status: "Success"});
     }
 

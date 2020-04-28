@@ -51,7 +51,7 @@ router.put('/:id', async (req, res) => {
     }
     
     try {
-        mongoProfile.findByIdAndUpdate(id, data);
+        await mongoProfile.findByIdAndUpdate(id, data);
         res.send({status: "success"});
     }
 
@@ -62,12 +62,12 @@ router.put('/:id', async (req, res) => {
 
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
 
     let id = req.params.id;
 
     try {
-        mongoFamily.findByIdAndDelete(id);
+        await mongoProfile.findByIdAndDelete(id);
         res.send({status: "Success"});
     }
 
