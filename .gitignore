@@ -210,6 +210,9 @@ modules.xml
 # Ignore all local history of files
 .history
 
+# Ignore vs code files
+.vs
+
 # End of https://www.gitignore.io/api/jetbrains+all,visualstudiocode
 
 database_config.json
